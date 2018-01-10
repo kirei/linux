@@ -38,8 +38,11 @@ MODULE_AUTHOR("Vojtech Pavlik <vojtech@ucw.cz>");
 MODULE_DESCRIPTION("Input driver event debug module");
 MODULE_LICENSE("GPL");
 
+static int silencer = 1;
+
 static void evbug_event(struct input_handle *handle, unsigned int type, unsigned int code, int value)
 {
+	if (silencer == 0)	
 	printk(KERN_DEBUG pr_fmt("Event. Dev: %s, Type: %d, Code: %d, Value: %d\n"),
 	       dev_name(&handle->dev->dev), type, code, value);
 }
